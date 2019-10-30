@@ -75,6 +75,7 @@
                         total += parseInt(n1);
                         document.getElementById("display2").innerText = total;
                         n1 = '';
+                        disp.pop();
                     break;
                     default:
                         n1 = '';
@@ -88,8 +89,7 @@
         if (disp.length == 0) {
             console.error('There is nothing to clear')
         }
-        hold += total;
-        document.getElementById("history").innerHTML += hold+"<br/>";
+        document.getElementById("history").innerHTML += hold + '='+ total+"<br/>";
         disp = [];
         hold = '';
         try {
@@ -154,7 +154,7 @@
         </tr>
         <tr>
             <td>
-                <button type="submit" onmousedown="display('=')" onmouseup="calculate('=')">=</button>
+                <button type="submit" onmousedown="display('')" onmouseup="calculate('=')">=</button>
             </td>
             <td>
                 <button type="submit" onclick="display(0)">0</button>
