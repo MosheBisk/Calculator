@@ -1,0 +1,11 @@
+ Volume in drive E has no label.
+ Volume Serial Number is 1F50-E4DF
+
+ Directory of E:\A Programing\Ariel\My GitHub files\Lesson 1
+
+10/30/2019  02:41 PM    <DIR>          .
+10/30/2019  02:41 PM    <DIR>          ..
+10/30/2019  04:44 PM    <DIR>          docs
+10/30/2019  05:12 PM                34 calcLog.txt
+               1 File(s)             34 bytes
+               3 Dir(s)  21,631,500,288 bytes free

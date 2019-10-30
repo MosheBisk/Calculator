@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Caculator2</title>
+    <script type="text/javascript">
+    let disp = [];
+    let hold = '', total=0;
+        /// Display numbers and operators
+        function display(num1) {
+            console.log ('display start, with: '+num1)
+            disp.push(num1);
+            document.getElementById("display").innerText += num1;
+            hold += num1;
+            console.log('display end')
+        }
+	function calculate(op){
+        if(typeof disp[-1] != "number" & typeof disp[-2] != "number" ){
+            console.error('User entered two operators')
+        }
+        console.log('calculate start, with: '+op)
+        let n1='', n2='', o='';
+	    for(i=0; i<disp.length; i++){
+            console.log('calculate for, start')
+            let c = disp[i];
+            if(typeof c == "number"){
+                console.log('calculate for, if==number '+c)
+                n1 += c;
+            }
+            else{
+                if(typeof disp[i+1]!="number"){
+                    console.error('User entered two operators')
+                }
+                console.log('calculate for, if!=number '+c)
+                if(n2 == ''){
+                    console.log('calculate for, if!=num #1')
+                    total = parseInt(n1);
+                    n2 = n1;
+                    n1 = '';
+                }
+                else{
+                    console.log('calculate for, if!=num #2')
+                    switch(o){
+                    case '+':
+                        console.log('calculate for, if!=num #2 case '+o)
+                        total += parseInt(n1);
+                        document.getElementById("display2").innerText = total;
+                        n2 += n1;
+                        n1 = '';
+                    break;
+                    case '-':
+                        console.log('calculate for, if!=num #2 case '+o)
+                        total -= parseInt(n1);
+                        document.getElementById("display2").innerText = total;
+                        n2 -= n1;
+                        n1 = '';
+                    break;
+                    case '*':
+                        console.log('calculate for, if!=num #2 case '+o)
+                        total *= parseInt(n1);
+                        document.getElementById("display2").innerText = total;
+                        n2 *= n1;
+                        n1 = '';
+                    break;
+                    case '/':
+                        console.log('calculate for, if!=num #2 case '+o)
+                        total /= parseInt(n1);
+                        document.getElementById("display2").innerText = total;
+                        n1 = '';
+                    break;
+                    case '=':
+                        calculate
+                        total += parseInt(n1);
+                        document.getElementById("display2").innerText = total;
+                        n1 = '';
+                    break;
+                    default:
+                        n1 = '';
+                    }
+                }
+                o = c;
+            }
+	    }
+    }
+    function mclear(){
+        if (disp.length == 0) {
+            console.error('There is nothing to clear')
+        }
+        hold += total;
+        document.getElementById("history").innerHTML += hold+"<br/>";
+        disp = [];
+        hold = '';
+        try {
+            document.getElementById("display").innerText = '';
+            document.getElementById("display2").innerText = '';
+        } catch (error) {
+            console.error('Cannot set property "innerText" of null')
+        }
+    }
+    </script>
+</head>
+<body>
+    <table border="1">
+        <tr>
+            <th colspan="3">
+                <div id="display"></div>
+                <div id="display2"></div>
+            </th>
+            <td>sm</td>
+        </tr>
+        <tr>
+            <td>
+                <button type="submit" onclick="display(7)">7</button>
+            </td>
+            <td>
+                <button type="submit" onclick="display(8)">8</button>
+            </td>
+            <td>
+                <button type="submit" onclick="display(9)">9</button>
+            </td>
+            <td>
+                <button type="submit" onmousedown="display('/')" onmouseup="calculate('/')">/</button>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button type="submit" onclick="display(4)">4</button>
+            </td>
+            <td>
+                <button type="submit" onclick="display(5)">5</button>
+            </td>
+            <td>
+                <button type="submit" onclick="display(6)">6</button>
+            </td>
+            <td>
+                <button type="submit" onmousedown="display('*')" onmouseup="calculate('*')">*</button>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button type="submit" onclick="display(1)">1</button>
+            </td>
+            <td>
+                <button type="submit" onclick="display(2)">2</button>
+            </td>
+            <td>
+                <button type="submit" onclick="display(3)">3</button>
+            </td>
+            <td>
+                <button type="submit" onmousedown="display('-')" onmouseup="calculate('-')">-</button>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button type="submit" onmousedown="display('=')" onmouseup="calculate('=')">=</button>
+            </td>
+            <td>
+                <button type="submit" onclick="display(0)">0</button>
+            </td>
+            <td>
+                <button type="submit" onmousedown="display('+')" onmouseup="calculate('+')">+</button>
+            </td>
+            <td>
+                <button type="submit" onclick="display('.')">.</button>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4">
+                <button type="submit" onclick="mclear()">Clear</button>
+            </td>
+        </tr>
+    </table>
+    <div id="history"></div>
+</body>
+</html>
